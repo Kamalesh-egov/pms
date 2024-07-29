@@ -1,0 +1,46 @@
+package digit.web.models;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.egov.common.contract.response.ResponseInfo;
+import org.springframework.validation.annotation.Validated;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Data;
+import lombok.Builder;
+
+/**
+ * ProjectResponse
+ */
+@Validated
+@jakarta.annotation.Generated(value = "org.egov.codegen.SpringBootCodegen", date = "2024-07-25T13:24:26.248936936+05:30[Asia/Kolkata]")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class ProjectResponse   {
+        @JsonProperty("ResponseInfo")
+          @NotNull
+
+          @Valid
+                private ResponseInfo responseInfo = null;
+
+        @JsonProperty("Projects")
+          @Valid
+                private List<Project> projects = null;
+
+
+        public ProjectResponse addProjectsItem(Project projectsItem) {
+            if (this.projects == null) {
+            this.projects = new ArrayList<>();
+            }
+        this.projects.add(projectsItem);
+        return this;
+        }
+
+}

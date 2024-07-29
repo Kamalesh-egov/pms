@@ -1,0 +1,92 @@
+serviceMaps:
+  serviceName: project-service
+  mappings:
+    - version: 1.0
+      description: Persists project details in tables
+      fromTopic: save-pt
+      isTransaction: true
+      isAuditEnabled: true
+      module: PT
+      objecIdJsonPath: $.id
+      tenantIdJsonPath: $.tenantId
+      transactionCodeJsonPath: $.projectNumber
+      auditAttributeBasePath: $.Projects
+      queryMaps:
+        - query: INSERT INTO eg_project(id, tenantid, name, projecttype, projectsubtype, department, description, referenceid, natureofwork, ancestors, startdate, enddate, istaskenabled, parent, rowversion, isdeleted, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: Projects.*
+          jsonMaps:
+            - jsonPath: $.Projects.*.id
+            - jsonPath: $.Projects.*.tenantId
+            - jsonPath: $.Projects.*.name
+            - jsonPath: $.Projects.*.projectType
+            - jsonPath: $.Projects.*.projectSubType
+            - jsonPath: $.Projects.*.department
+            - jsonPath: $.Projects.*.description
+            - jsonPath: $.Projects.*.referenceID
+            - jsonPath: $.Projects.*.natureOfWork
+            - jsonPath: $.Projects.*.ancestors
+            - jsonPath: $.Projects.*.startDate
+            - jsonPath: $.Projects.*.endDate
+            - jsonPath: $.Projects.*.isTaskEnabled
+            - jsonPath: $.Projects.*.parent
+            - jsonPath: $.Projects.*.rowVersion
+#            - jsonPath: $.Projects.*.additionalDetails
+            - jsonPath: $.Projects.*.isDeleted
+            - jsonPath: $.Projects.*.auditDetails.createdBy
+            - jsonPath: $.Projects.*.auditDetails.lastModifiedBy
+            - jsonPath: $.Projects.*.auditDetails.createdTime
+            - jsonPath: $.Projects.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_address(id, tenantid, doorno, latitude, longitude, locationaccuracy, type, addressline1, addressline2, landmark, city, pincode, buildingname, street, localitycode, localityname, localitylabel, localitylatitude, localitylongitude, projectid, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: Projects.*
+          jsonMaps:
+            - jsonPath: $.Projects.*.address.id
+            - jsonPath: $.Projects.*.address.tenantId
+            - jsonPath: $.Projects.*.address.doorNo
+            - jsonPath: $.Projects.*.address.latitude
+            - jsonPath: $.Projects.*.address.longitude
+            - jsonPath: $.Projects.*.address.locationAccuracy
+            - jsonPath: $.Projects.*.address.type
+            - jsonPath: $.Projects.*.address.addressLine1
+            - jsonPath: $.Projects.*.address.addressLine2
+            - jsonPath: $.Projects.*.address.landmark
+            - jsonPath: $.Projects.*.address.city
+            - jsonPath: $.Projects.*.address.pincode
+            - jsonPath: $.Projects.*.address.buildingName
+            - jsonPath: $.Projects.*.address.street
+            - jsonPath: $.Projects.*.address.locality.code
+            - jsonPath: $.Projects.*.address.locality.name
+            - jsonPath: $.Projects.*.address.locality.label
+            - jsonPath: $.Projects.*.address.locality.latitude
+            - jsonPath: $.Projects.*.address.locality.longitude
+#            - jsonPath: $.Projects.*.address.locality.children
+            - jsonPath: $.Projects.*.id
+            - jsonPath: $.Projects.*.auditDetails.createdBy
+            - jsonPath: $.Projects.*.auditDetails.lastModifiedBy
+            - jsonPath: $.Projects.*.auditDetails.createdTime
+            - jsonPath: $.Projects.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_target(id, projectid, beneficiarytype, baseline, target, isdeleted, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: Projects.*
+          jsonMaps:
+            - jsonPath: $.Projects.*.targets.*.id
+            - jsonPath: $.Projects.*.id
+            - jsonPath: $.Projects.*.targets.*.beneficiaryType
+            - jsonPath: $.Projects.*.targets.*.baseline
+            - jsonPath: $.Projects.*.targets.*.target
+            - jsonPath: $.Projects.*.targets.*.isDeleted
+            - jsonPath: $.Projects.*.targets.*.auditDetails.createdBy
+            - jsonPath: $.Projects.*.targets.*.auditDetails.lastModifiedBy
+            - jsonPath: $.Projects.*.targets.*.auditDetails.createdTime
+            - jsonPath: $.Projects.*.targets.*.auditDetails.lastModifiedTime
+
+#        - query: INSERT INTO eg_locality_children(id, localityId, child, createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?);
+#          basePath: Projects.*
+#          jsonMaps:
+#            - jsonPath: $.Projects.*.address.locality.children.*.id
+#            - jsonPath: $.Projects.*.address.locality.children.*.localityId
+#            - jsonPath: $.Projects.*.address.locality.children.*.child
+#            - jsonPath: $.Projects.*.address.locality.children.*.createdBy
+#            - jsonPath: $.Projects.*.address.locality.children.*.lastModifiedBy
+#            - jsonPath: $.Projects.*.address.locality.children.*.createdTime
+#            - jsonPath: $.Projects.*.address.locality.children.*.lastModifiedTime
