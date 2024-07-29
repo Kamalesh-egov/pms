@@ -24,6 +24,10 @@ public class Target   {
 
         @Size(min=2,max=64)         private String id = null;
 
+    @JsonProperty("projectId")
+
+    @Size(min=2,max=64)         private String projectId = null;
+
         @JsonProperty("beneficiaryType")
           @NotNull
 

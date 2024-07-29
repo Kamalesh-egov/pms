@@ -67,10 +67,10 @@ serviceMaps:
             - jsonPath: $.Projects.*.auditDetails.lastModifiedTime
 
         - query: INSERT INTO eg_target(id, projectid, beneficiarytype, baseline, target, isdeleted, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-          basePath: Projects.*
+          basePath: Projects.*.targets.*
           jsonMaps:
             - jsonPath: $.Projects.*.targets.*.id
-            - jsonPath: $.Projects.*.id
+            - jsonPath: $.Projects.*.targets.*.projectId
             - jsonPath: $.Projects.*.targets.*.beneficiaryType
             - jsonPath: $.Projects.*.targets.*.baseline
             - jsonPath: $.Projects.*.targets.*.target

@@ -15,7 +15,7 @@ CREATE TABLE eg_project (
     parent character varying(64),
     rowVersion INT,
 --    additionalDetails JSONB,
-    isDeleted BOOLEAN
+    isDeleted BOOLEAN,
     createdBy character varying(64),
     lastModifiedBy character varying(64),
     createdTime BIGINT,

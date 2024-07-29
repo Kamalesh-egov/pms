@@ -41,6 +41,7 @@ public class ProjectEnrichment {
                 for (Target target : project.getTargets()) {
                     if (target.getId() == null) {
                         target.setId(UUID.randomUUID().toString());
+                        target.setProjectId(project.getId());
                         target.setIsDeleted(false);
                         target.setAuditDetails(auditDetails);
                     }
