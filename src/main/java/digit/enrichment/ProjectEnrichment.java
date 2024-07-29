@@ -25,30 +25,22 @@ public class ProjectEnrichment {
             project.setAuditDetails(auditDetails);
 
             // Enrich UUIDs
-            if (project.getId() == null) {
-                project.setId(UUID.randomUUID().toString());
-            }
+            project.setId(UUID.randomUUID().toString());
 
             if (project.getIsDeleted() == null) {
                 project.setIsDeleted(false);
             }
 
-            if (project.getAddress() != null && project.getAddress().getId() == null) {
-                project.getAddress().setId(UUID.randomUUID().toString());
-            }
+            project.getAddress().setId(UUID.randomUUID().toString());
 
             if (project.getTargets() != null) {
                 for (Target target : project.getTargets()) {
-                    if (target.getId() == null) {
-                        target.setId(UUID.randomUUID().toString());
-                        target.setProjectId(project.getId());
-                        target.setIsDeleted(false);
-                        target.setAuditDetails(auditDetails);
-                    }
+                    target.setId(UUID.randomUUID().toString());
+                    target.setProjectId(project.getId());
+                    target.setIsDeleted(false);
+                    target.setAuditDetails(auditDetails);
                 }
             }
-
-            System.out.println(project.getTargets());
         }
 
     }

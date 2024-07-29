@@ -1,5 +1,6 @@
 package digit.service;
 
+import digit.config.PTConfiguration;
 import digit.enrichment.ProjectEnrichment;
 import digit.kafka.Producer;
 import digit.repository.ProjectRepository;
@@ -35,12 +36,17 @@ public class ProjectService {
     @Autowired
     private Producer producer;
 
+    @Autowired
+    private PTConfiguration configuration;
+
     public List<Project> createPtRequest(ProjectRequest projectRequest) {
 
         projectEnrichment.enrichProject(projectRequest);
 
-        System.out.println(projectRequest);
-        producer.push("save-pt", projectRequest);
+//        System.out.println(projectRequest);
+//        System.out.println(configuration.getCreateTopic());
+
+        producer.push(configuration.getCreateTopic(), projectRequest);
 
         return projectRequest.getProjects();
     }

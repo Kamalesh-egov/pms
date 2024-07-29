@@ -35,21 +35,18 @@ import java.util.*;
 @RequestMapping("")
 public class ProjectApiController{
 
-    private final ObjectMapper objectMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-    private final HttpServletRequest request;
+    @Autowired
+    private HttpServletRequest request;
 
-    private final ProjectService projectService;
+    @Autowired
+    private ProjectService projectService;
 
     @Autowired
     private ResponseInfoFactory responseInfoFactory;
 
-    @Autowired
-    public ProjectApiController(ObjectMapper objectMapper, HttpServletRequest request, ProjectService projectService) {
-        this.objectMapper = objectMapper;
-        this.request = request;
-        this.projectService = projectService;
-    }
 
     @RequestMapping(value="/project/v1/_create", method = RequestMethod.POST)
     public ResponseEntity<ProjectResponse> projectV1CreatePost(@Parameter(in = ParameterIn.DEFAULT, description = "Details for the new Project.", required=true, schema=@Schema()) @Valid @RequestBody ProjectRequest projectRequest) {
