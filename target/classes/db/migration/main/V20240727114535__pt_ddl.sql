@@ -14,7 +14,7 @@ CREATE TABLE eg_project (
     isTaskEnabled BOOLEAN,
     parent character varying(64),
     rowVersion INT,
---    additionalDetails JSONB,
+    additionalDetails JSONB,
     isDeleted BOOLEAN,
     createdBy character varying(64),
     lastModifiedBy character varying(64),
@@ -43,7 +43,7 @@ CREATE TABLE eg_address (
     localityLabel character varying(256),
     localityLatitude character varying(64),
     localityLongitude character varying(64),
---    localityChildren JSONB,
+--    localityChildren TEXT[],
     projectId character varying(64),
     createdBy character varying(64),
     lastModifiedBy character varying(64),
@@ -71,31 +71,3 @@ CREATE TABLE eg_target (
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
-
---CREATE TABLE eg_locality_children (
---    id character varying(64),
---    localityId character varying(64),
---    child character varying(64),
---    createdBy character varying(64),
---    lastModifiedBy character varying(64),
---    createdTime BIGINT,
---    lastModifiedTime BIGINT,
---    CONSTRAINT uk_eg_locality_children PRIMARY KEY (id),
---    CONSTRAINT fk_eg_locality_children FOREIGN KEY (localityId) REFERENCES eg_address (id)
---        ON UPDATE CASCADE
---        ON DELETE CASCADE
---);
---
---CREATE TABLE eg_additional_details (
---    id character varying(64),
---    projectId character varying(64),
---    details JSONB,
---    createdBy character varying(64),
---    lastModifiedBy character varying(64),
---    createdTime BIGINT,
---    lastModifiedTime BIGINT,
---    CONSTRAINT uk_eg_additional_details PRIMARY KEY (id),
---    CONSTRAINT fk_eg_additional_details FOREIGN KEY (projectId) REFERENCES eg_project (id)
---        ON UPDATE CASCADE
---        ON DELETE CASCADE
---);

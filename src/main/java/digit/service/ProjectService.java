@@ -43,7 +43,7 @@ public class ProjectService {
 
         projectEnrichment.enrichProject(projectRequest);
 
-//        System.out.println(projectRequest);
+        System.out.println(projectRequest);
 //        System.out.println(configuration.getCreateTopic());
 
         producer.push(configuration.getCreateTopic(), projectRequest);

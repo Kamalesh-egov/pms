@@ -12,7 +12,7 @@ serviceMaps:
       transactionCodeJsonPath: $.projectNumber
       auditAttributeBasePath: $.Projects
       queryMaps:
-        - query: INSERT INTO eg_project(id, tenantid, name, projecttype, projectsubtype, department, description, referenceid, natureofwork, ancestors, startdate, enddate, istaskenabled, parent, rowversion, isdeleted, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO eg_project(id, tenantid, name, projecttype, projectsubtype, department, description, referenceid, natureofwork, ancestors, startdate, enddate, istaskenabled, parent, rowversion, additionaldetails, isdeleted, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::jsonb, ?, ?, ?, ?, ?);
           basePath: Projects.*
           jsonMaps:
             - jsonPath: $.Projects.*.id
@@ -30,7 +30,7 @@ serviceMaps:
             - jsonPath: $.Projects.*.isTaskEnabled
             - jsonPath: $.Projects.*.parent
             - jsonPath: $.Projects.*.rowVersion
-#            - jsonPath: $.Projects.*.additionalDetails
+            - jsonPath: $.Projects.*.additionalDetails
             - jsonPath: $.Projects.*.isDeleted
             - jsonPath: $.Projects.*.auditDetails.createdBy
             - jsonPath: $.Projects.*.auditDetails.lastModifiedBy
@@ -79,14 +79,3 @@ serviceMaps:
             - jsonPath: $.Projects.*.targets.*.auditDetails.lastModifiedBy
             - jsonPath: $.Projects.*.targets.*.auditDetails.createdTime
             - jsonPath: $.Projects.*.targets.*.auditDetails.lastModifiedTime
-
-#        - query: INSERT INTO eg_locality_children(id, localityId, child, createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?);
-#          basePath: Projects.*
-#          jsonMaps:
-#            - jsonPath: $.Projects.*.address.locality.children.*.id
-#            - jsonPath: $.Projects.*.address.locality.children.*.localityId
-#            - jsonPath: $.Projects.*.address.locality.children.*.child
-#            - jsonPath: $.Projects.*.address.locality.children.*.createdBy
-#            - jsonPath: $.Projects.*.address.locality.children.*.lastModifiedBy
-#            - jsonPath: $.Projects.*.address.locality.children.*.createdTime
-#            - jsonPath: $.Projects.*.address.locality.children.*.lastModifiedTime
